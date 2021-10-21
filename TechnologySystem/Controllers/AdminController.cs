@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -62,5 +64,43 @@ namespace TechnologySystem.Controllers
             };
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var model = new ViewModels.AccountViewModel()
+            {
+                Roles = new List<string>() { Role.Trainer, Role.Staff }
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(AccountViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, model.Role);
+                    return RedirectToAction(nameof(Index));
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+
     }
 }

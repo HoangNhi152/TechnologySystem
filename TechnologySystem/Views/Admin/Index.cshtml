@@ -30,9 +30,9 @@
                 <td>@staff.UserName</td>
                 <td>@staff.FullName</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Account", new { id = staff.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Delete", "Delete", "Account", new { id = staff.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Details", "Details", "Account", new { id = staff.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Edit", "Edit", "Admin", new { id = staff.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", "Admin", new { id = staff.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Details", "Details", "Admin", new { id = staff.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("ResetPassword", "ResetPassword", "Account", new { id = staff.Id }, new { @class = "btn btn-info" })
                 </td>
             </tr>

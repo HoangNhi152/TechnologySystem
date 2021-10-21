@@ -25,7 +25,7 @@
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole(Role.Admin))
                     {
-                        <li>@Html.ActionLink("Account UserManagement", "Index", "Admin", null)</li>
+                        <li>@Html.ActionLink("Account UserManagement", "Index", "Admin")</li>
                     }
                    @* @if (User.IsInRole(Role.Staff))
                     {
