@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TechnologySystem.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Course List</h2>
+
+<p>
+    @Html.ActionLink("Create a new Course", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="form-group">
+    @using (Html.BeginForm("Index", "Course", FormMethod.Get))
+    {
+        <div class="form-group">
+            @Html.TextBox("searchString", null, new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    }
+</div>
+
+<h3>Course</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 0;}
+        @foreach (var course in Model)
+        {
+            <tr>
+                <th scope="row">@{i++;}@i</th>
+                <td>@course.CourseName</td>
+                <td>@course.Category.CategoryName</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Category", new { id = course.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", "Category", new { id = course.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
