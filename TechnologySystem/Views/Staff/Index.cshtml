@@ -1,0 +1,39 @@
+﻿@model TechnologySystem.ViewModels.UsersGroupViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>View Index Staff</h2>
+
+<p>
+    @Html.ActionLink("Create a new Account", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+
+<h3>Trainee Account</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Full name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 0;}
+        @foreach (var trainee in Model.Trainees)
+        {
+            <tr>
+                <th scope="row">@{i++;}@i</th>
+                <td>@trainee.UserName</td>
+                <td>@trainee.FullName</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Staff", new { id = trainee.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", "Staff", new { id = trainee.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("ResetPassword", "ResetPassword", "Staff", new { email = trainee.Email }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

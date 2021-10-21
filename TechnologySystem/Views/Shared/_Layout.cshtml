@@ -27,11 +27,12 @@
                     {
                         <li>@Html.ActionLink("Account UserManagement", "Index", "Admin")</li>
                     }
-                   @* @if (User.IsInRole(Role.Staff))
+                   @if (User.IsInRole(Role.Staff))
                     {
-                        <li>@Html.ActionLink("Trainee Profile", "Index", "Admin", new { Area = "Staff" }, null)</li>
-                        <li>@Html.ActionLink("Categories Management", "Index", "Categories", new { }, null)</li>
-                    }*@
+                        <li>@Html.ActionLink("Trainee Profile", "Index", "Staff", new { Area = "Staff" }, null)</li>
+
+                        @*<li>@Html.ActionLink("Categories Management", "Index", "Categories", new { }, null)</li>*@
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

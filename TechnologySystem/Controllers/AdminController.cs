@@ -15,6 +15,24 @@ namespace TechnologySystem.Controllers
 {
     public class AdminController : Controller
     {
+        // GET: Admin/Account
+        public async Task<ActionResult> Index()
+        {
+            var trainerRole = await _context.Roles.SingleOrDefaultAsync(r => r.Name == Role.Trainer);
+            var staffRole = await _context.Roles.SingleOrDefaultAsync(r => r.Name == Role.Staff);
+
+            var model = new UsersGroupViewModel()
+            {
+                Trainers = await _context.Users
+                    .Where(u => u.Roles.Any(r => r.RoleId == trainerRole.Id))
+                    .ToListAsync(),
+                Staffs = await _context.Users
+                    .Where(u => u.Roles.Any(r => r.RoleId == staffRole.Id))
+                    .ToListAsync(),
+            };
+            return View(model);
+        }
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly ApplicationDbContext _context;
@@ -46,24 +64,6 @@ namespace TechnologySystem.Controllers
             {
                 _userManager = value;
             }
-        }
-
-        // GET: Admin/Account
-        public async Task<ActionResult> Index()
-        {
-            var trainerRole = await _context.Roles.SingleOrDefaultAsync(r => r.Name == Role.Trainer);
-            var staffRole = await _context.Roles.SingleOrDefaultAsync(r => r.Name == Role.Staff);
-
-            var model = new UsersGroupViewModel()
-            {
-                Trainers = await _context.Users
-                    .Where(u => u.Roles.Any(r => r.RoleId == trainerRole.Id))
-                    .ToListAsync(),
-                Staffs = await _context.Users
-                    .Where(u => u.Roles.Any(r => r.RoleId == staffRole.Id))
-                    .ToListAsync(),
-            };
-            return View(model);
         }
 
         [HttpGet]

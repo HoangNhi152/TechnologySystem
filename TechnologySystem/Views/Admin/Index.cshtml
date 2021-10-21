@@ -31,7 +31,6 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Admin", new { id = staff.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete", "Delete", "Admin", new { id = staff.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Details", "Details", "Admin", new { id = staff.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("ResetPassword", "ResetPassword", "Admin", new { email = staff.Email }, new { @class = "btn btn-info" })
                 </td>
             </tr>
@@ -60,7 +59,6 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Admin", new { id = trainer.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete", "Delete", "Admin", new { id = trainer.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Details", "Details", "Admin", new { id = trainer.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("ResetPassword", "ResetPassword", "Admin", new { id = trainer.Id }, new { @class = "btn btn-info" })
                 </td>
             </tr>
