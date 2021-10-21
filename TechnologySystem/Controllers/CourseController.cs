@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TechnologySystem.Models;
+using TechnologySystem.ViewModels;
 
 namespace TechnologySystem.Controllers
 {
@@ -28,5 +29,30 @@ namespace TechnologySystem.Controllers
             return View(courses);
         }
 
+        public ActionResult Create()
+        {
+            var model = new ViewModels.CourseCategories()
+            {
+                Categories = _context.Categories.ToList()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(CourseCategories courseCategories, int Id)
+        {
+            if(ModelState.IsValid)
+            {
+                var newCourse = new Course
+                {
+                    CourseName = courseCategories.Course.CourseName,
+                    Description = courseCategories.Course.Description,
+                    CategoryId = Id
+                };
+                _context.Courses.Add(newCourse);
+            _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

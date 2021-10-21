@@ -198,6 +198,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Utils\Role.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\CourseCategories.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\UsersGroupViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -271,6 +272,7 @@
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Course\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
