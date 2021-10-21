@@ -45,5 +45,25 @@ namespace TechnologySystem.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Edit(int id )
+        {
+            var category = _context.Categories.SingleOrDefault(c => c.Id == id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Category newCategory)
+        {
+            if(ModelState.IsValid)
+            {
+                var oldCategory = _context.Categories.SingleOrDefault(c => c.Id == newCategory.Id);
+                oldCategory.CategoryName = newCategory.CategoryName;
+                oldCategory.Description = newCategory.Description;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+
+        }
     }
 }
