@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
@@ -179,10 +180,15 @@
     <Compile Include="Migrations\202110210914080_AdminTable.Designer.cs">
       <DependentUpon>202110210914080_AdminTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110211405519_CategoryTable.cs" />
+    <Compile Include="Migrations\202110211405519_CategoryTable.Designer.cs">
+      <DependentUpon>202110211405519_CategoryTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Utils\Role.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
@@ -258,6 +264,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -275,6 +282,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202110210914080_AdminTable.resx">
       <DependentUpon>202110210914080_AdminTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110211405519_CategoryTable.resx">
+      <DependentUpon>202110211405519_CategoryTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
