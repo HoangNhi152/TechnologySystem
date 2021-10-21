@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,18 +17,24 @@ namespace TechnologySystem.Models
             // Add custom user claims here
             return userIdentity;
         }
-    }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+        [StringLength(225)]
+        [Display(Name = "Fullname")]
+        public string FullName { get; set; }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
+        [Range(0, int.MaxValue)]
+        public int Age { get; set; }
+
+        [Display(Name = "Date of Birth")]
+        public string DateofBirth { get; set; }
+
+        [StringLength(255)]
+        public string Address { get; set; }
+
+        [StringLength(255)]
+        public string Education { get; set; }
+
+        [StringLength(255)]
+        public string Specialty { get; set; }
     }
 }
