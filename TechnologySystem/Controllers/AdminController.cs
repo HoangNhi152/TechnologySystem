@@ -152,6 +152,12 @@ namespace TechnologySystem.Controllers
             return View(model);
         }
 
+        public ActionResult Delete(string id)
+        {
+            var user = UserManager.FindById(id);
+            UserManager.Delete(user);
+            return RedirectToAction("Index");
+        }
 
         private void AddErrors(IdentityResult result)
         {

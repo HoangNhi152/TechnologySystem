@@ -33,7 +33,7 @@
                     @Html.ActionLink("Edit", "Edit", "Admin", new { id = staff.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete", "Delete", "Admin", new { id = staff.Id }, new { @class = "btn btn-danger" })
                     @Html.ActionLink("Details", "Details", "Admin", new { id = staff.Id }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("ResetPassword", "ResetPassword", "Account", new { id = staff.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("ResetPassword", "ResetPassword", "Admin", new { id = staff.Id }, new { @class = "btn btn-info" })
                 </td>
             </tr>
         }
@@ -59,10 +59,10 @@
                 <td>@trainer.UserName</td>
                 <td>@trainer.FullName</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Account", new { id = trainer.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Delete", "Delete", "Account", new { id = trainer.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Details", "Details", "Account", new { id = trainer.Id }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("ResetPassword", "ResetPassword", "Account", new { id = trainer.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Edit", "Edit", "Admin", new { id = trainer.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", "Admin", new { id = trainer.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Details", "Details", "Admin", new { id = trainer.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("ResetPassword", "ResetPassword", "Admin", new { id = trainer.Id }, new { @class = "btn btn-info" })
                 </td>
             </tr>
         }

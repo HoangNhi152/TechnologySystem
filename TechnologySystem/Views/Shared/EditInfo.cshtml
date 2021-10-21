@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        @Html.HiddenFor(m => m.Roles)
+        @Html.HiddenFor(m => m.Roles)          @*UserName*@
 
         @if (Model.Roles.Any(r => r == Role.Trainer))
         {
