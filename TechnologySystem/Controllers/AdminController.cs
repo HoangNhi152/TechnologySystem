@@ -159,6 +159,49 @@ namespace TechnologySystem.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult ResetPassword(string email)
+        {
+            TempData["userEmail"] = email;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            //var email = (string)TempData["userEmail"];
+            var user = await UserManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = "The user does not exist";
+                return View(model);
+            }
+
+            var roles = await UserManager.GetRolesAsync(user.Id);
+            if (!roles.All(r => r == Role.Staff || r == Role.Trainer))
+            {
+                ViewBag.ErrorMessage = "The user cannot be reset. Permission is denied.";
+                return View(model);
+            }
+
+            model.Code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            AddErrors(result);
+            return View();
+        }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

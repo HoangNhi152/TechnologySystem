@@ -9,7 +9,6 @@
     @Html.ActionLink("Create a new Account", "Create", null, new { @class = "btn btn-primary" })
 </p>
 
-</p>
 
 <h3>Staff Account</h3>
 <table class="table">
@@ -33,7 +32,7 @@
                     @Html.ActionLink("Edit", "Edit", "Admin", new { id = staff.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete", "Delete", "Admin", new { id = staff.Id }, new { @class = "btn btn-danger" })
                     @Html.ActionLink("Details", "Details", "Admin", new { id = staff.Id }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("ResetPassword", "ResetPassword", "Admin", new { id = staff.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("ResetPassword", "ResetPassword", "Admin", new { email = staff.Email }, new { @class = "btn btn-info" })
                 </td>
             </tr>
         }
