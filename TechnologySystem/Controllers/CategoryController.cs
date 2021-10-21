@@ -65,5 +65,13 @@ namespace TechnologySystem.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public ActionResult Delete(int id)
+        {
+            var category = _context.Categories.SingleOrDefault(c => c.Id == id);
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
