@@ -1,17 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Ajax.Utilities;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using TechnologySystem.Models;
 
 namespace TechnologySystem.Controllers
 {
     public class CategoryController : Controller
     {
-        // GET: Category
-        public ActionResult Index()
+        private ApplicationDbContext _context;
+        public CategoryController()
         {
-            return View();
+            _context = new ApplicationDbContext();
         }
+        // GET: Categories
+        public ActionResult Index(string searchString)
+        {
+            var categories = _context.Categories.ToList();
+
+            if (!searchString.IsNullOrWhiteSpace())
+            {
+                categories = categories.Where(c => c.CategoryName.Contains(searchString)).ToList();
+            }
+
+            return View(categories);
+        }
+
+
     }
 }

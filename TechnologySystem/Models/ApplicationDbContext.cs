@@ -9,7 +9,7 @@ namespace TechnologySystem.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        DbSet<Category> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
