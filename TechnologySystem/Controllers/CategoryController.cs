@@ -25,6 +25,25 @@ namespace TechnologySystem.Controllers
             return View(categories);
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Category category)
+        {
+            if (!ModelState.IsValid) return View(category);
 
+            var newCategory = new Category()
+            {
+                CategoryName = category.CategoryName,
+                Description = category.Description
+            };
+
+            _context.Categories.Add(newCategory);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
