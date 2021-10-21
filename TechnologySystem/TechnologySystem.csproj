@@ -184,11 +184,16 @@
     <Compile Include="Migrations\202110211405519_CategoryTable.Designer.cs">
       <DependentUpon>202110211405519_CategoryTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110211624588_CourseTable.cs" />
+    <Compile Include="Migrations\202110211624588_CourseTable.Designer.cs">
+      <DependentUpon>202110211624588_CourseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Utils\Role.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
@@ -267,6 +272,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Course\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -287,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110211405519_CategoryTable.resx">
       <DependentUpon>202110211405519_CategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110211624588_CourseTable.resx">
+      <DependentUpon>202110211624588_CourseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using TechnologySystem.Models;
@@ -17,9 +18,10 @@ namespace TechnologySystem.Controllers
         {
             var categories = _context.Categories.ToList();
 
-            if (!searchString.IsNullOrWhiteSpace())
+            if (!String.IsNullOrEmpty(searchString))
             {
-                categories = categories.Where(c => c.CategoryName.Contains(searchString)).ToList();
+                searchString = searchString.ToLower();
+                categories = categories.Where(c => c.CategoryName.ToLower().Contains(searchString)).ToList();
             }
 
             return View(categories);
