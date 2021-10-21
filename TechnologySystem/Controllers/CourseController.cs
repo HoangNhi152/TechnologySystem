@@ -54,5 +54,32 @@ namespace TechnologySystem.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult Edit(int id)
+        {
+            var Course = _context.Courses.SingleOrDefault(t => t.Id == id);
+            return View(Course);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Course newCourse)
+        {
+            if(ModelState.IsValid)
+            {
+                var oldCourse = _context.Courses.SingleOrDefault(c => c.Id == newCourse.Id);
+                oldCourse.CourseName = newCourse.CourseName;
+                oldCourse.Description = newCourse.Description;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var course = _context.Courses.SingleOrDefault(c => c.Id == id);
+            _context.Courses.Remove(course);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

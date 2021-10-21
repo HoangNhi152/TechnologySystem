@@ -29,6 +29,7 @@
             <th scope="col">No.</th>
             <th scope="col">Course Name</th>
             <th scope="col">Category</th>
+            <th scope="col">Description</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -40,9 +41,10 @@
                 <th scope="row">@{i++;}@i</th>
                 <td>@course.CourseName</td>
                 <td>@course.Category.CategoryName</td>
+                <td>@course.Description</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Category", new { id = course.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Delete", "Delete", "Category", new { id = course.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Edit", "Edit", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", "Course", new { id = course.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
