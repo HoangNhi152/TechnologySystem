@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -16,16 +17,25 @@ namespace TechnologySystem.Controllers
     public class StaffController : Controller
     {
         // GET: Admin/Account
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchString)
         {
             var traineeRole = await _context.Roles.SingleOrDefaultAsync(r => r.Name == Role.Trainee);
-            var model = new UsersGroupViewModel()
+            var data = new UsersGroupViewModel
             {
                 Trainees = await _context.Users
-                    .Where(u => u.Roles.Any(r => r.RoleId == traineeRole.Id))
-                    .ToListAsync(),
+                        .Where(u => u.Roles.Any(r => r.RoleId == traineeRole.Id))
+                        .ToListAsync()
             };
-            return View(model);
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                data.Trainees = data.Trainees.Where((c => !String.IsNullOrEmpty(c.FullName) && c.FullName.ToLower().Contains(searchString)
+                                        || searchString.Contains(c.Age.ToString()))).ToList();
+                return View(data);
+
+            }
+            return View(data);
         }
 
         private ApplicationSignInManager _signInManager;
@@ -142,6 +152,13 @@ namespace TechnologySystem.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        public ActionResult Delete(string id)
+        {
+            var user = UserManager.FindById(id);
+            UserManager.Delete(user);
+            return RedirectToAction("Index");
         }
 
         private void AddErrors(IdentityResult result)
