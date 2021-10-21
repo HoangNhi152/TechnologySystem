@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TechnologySystem.Models;
+using TechnologySystem.Utils;
 
 namespace TechnologySystem.Controllers
 {
@@ -155,7 +156,7 @@ namespace TechnologySystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "admin");
+                    await UserManager.AddToRoleAsync(user.Id, Role.Admin);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
