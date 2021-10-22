@@ -14,8 +14,7 @@
         <p>Specialty: @Model.Specialty</p>
     </div>
 </div>
-
-<div class="form-group">
-    @Html.ActionLink("Edit My Profile","Edit","Trainers",null,new { @class = "btn btn-info" })
-</div>
+    <div class="form-group">
+        @Html.ActionLink("Edit My Profile", "Edit", "Trainer", new { id = Model.Id}, new { @class = "btn btn-info" })
+    </div>
 
