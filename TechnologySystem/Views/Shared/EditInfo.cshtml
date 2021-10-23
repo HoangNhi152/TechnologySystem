@@ -64,10 +64,10 @@
     @if (Model.Roles.Any(r => r == Role.Trainer))
     {
         <div class="form-group">
-            @Html.LabelFor(model => model.Specialty, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.Specialty, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Specialty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Specialty, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.User.Specialty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.User.Specialty, "", new { @class = "text-danger" })
             </div>
         </div>
     }
@@ -75,10 +75,10 @@
     @if (Model.Roles.Any(r => r == Role.Trainee))
     {
         <div class="form-group">
-            @Html.LabelFor(model => model.Education, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.Education, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Education, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Education, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.User.Education, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.User.Education, "", new { @class = "text-danger" })
             </div>
         </div>
     }

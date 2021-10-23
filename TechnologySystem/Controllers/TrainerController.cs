@@ -77,7 +77,7 @@ namespace TechnologySystem.Controllers
                 userinDb.Email = user.Email;
                 userinDb.UserName = user.Email;
                 userinDb.Address = user.Address;
-                userinDb.Specialty = model.Specialty;
+                userinDb.Specialty = user.Specialty;
                 IdentityResult result = await UserManager.UpdateAsync(userinDb);
                
 
