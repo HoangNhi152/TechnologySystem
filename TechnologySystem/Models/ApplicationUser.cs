@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TechnologySystem.Models
 {
@@ -26,7 +26,7 @@ namespace TechnologySystem.Models
         public int Age { get; set; }
 
         [Display(Name = "Date of Birth")]
-        public string DateofBirth { get; set; }
+        public DateTime DateofBirth { get; set; } = DateTime.Now;
 
         [StringLength(255)]
         public string Address { get; set; }

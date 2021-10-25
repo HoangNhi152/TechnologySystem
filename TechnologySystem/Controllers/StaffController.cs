@@ -82,9 +82,11 @@ namespace TechnologySystem.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(RegisterViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
+                    FullName = model.FullName, Age = model.Age, DateofBirth = model.DateofBirth, Education = model.Education};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

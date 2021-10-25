@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TechnologySystem.Models
@@ -70,9 +71,19 @@ namespace TechnologySystem.Models
         public string Email { get; set; }
 
         [Required]
-        [EmailAddress]
         [Display(Name = "FullName")]
         public string FullName { get; set; }
+
+        [Required]
+        public int Age { get; set; }
+
+        [Required]
+        [Display(Name = "DateTime")]
+        public DateTime DateofBirth { get; set; }
+
+        [Required]
+        [Display(Name = "Education")]
+        public string Education { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
