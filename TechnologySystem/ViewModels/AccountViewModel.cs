@@ -33,10 +33,10 @@ namespace TechnologySystem.ViewModels
         [Display(Name = "Age")]
         public int Age { get; set; }
 
-        [Required]
+/*        [Required]
         [StringLength(100)]
         [Display(Name = "Specialty")]
-        public string Specialty { get; set; }
+        public string Specialty { get; set; }*/
 
         [Required]
         [StringLength(100)]

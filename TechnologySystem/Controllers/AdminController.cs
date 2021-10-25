@@ -84,7 +84,7 @@ namespace TechnologySystem.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email,
                     Email = model.Email, FullName = model.FullName,
-                    Age = model.Age, Specialty = model.Specialty, Address = model.Address};
+                    Age = model.Age, Address = model.Address};
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

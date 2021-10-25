@@ -81,9 +81,9 @@ namespace TechnologySystem.Models
         [Display(Name = "DateTime")]
         public DateTime DateofBirth { get; set; }
 
-        [Required]
+ /*       [Required]
         [Display(Name = "Education")]
-        public string Education { get; set; }
+        public string Education { get; set; }*/
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
