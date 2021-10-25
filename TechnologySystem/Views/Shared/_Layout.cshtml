@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("FPT Technology System", "Index", "Home", new { @class = "navbar-brand" })
+                @Html.ActionLink("FPT Technology System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -30,9 +30,16 @@
                     @if (User.IsInRole(Role.Staff))
                     {
                         <li>@Html.ActionLink("Trainee Profile", "Index", "Staff")</li>
-
                         <li>@Html.ActionLink("Categories Management", "Index", "Category")</li>
                         <li>@Html.ActionLink("Course Management", "Index", "Course")</li>
+                    }
+                    @if (User.IsInRole(Role.Trainer))
+                    {
+                        <li>@Html.ActionLink("Trainer Profile", "Index", "Trainer")</li>
+                    }
+                    @if (User.IsInRole(Role.Trainee))
+                    {
+                        <li>@Html.ActionLink("Trainee Profile", "Index", "Trainee")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

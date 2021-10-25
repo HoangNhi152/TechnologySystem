@@ -11,6 +11,7 @@ namespace TechnologySystem.Models
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Course> Courses { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
