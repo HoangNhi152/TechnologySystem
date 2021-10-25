@@ -19,10 +19,29 @@ namespace TechnologySystem.ViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        [Display(Name = "FullName")]
+        public string FullName { get; set; }
+
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Display(Name = "Specialty")]
+        public string Specialty { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
 
         [Required]
         public string Role { get; set; }

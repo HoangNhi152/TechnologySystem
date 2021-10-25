@@ -15,6 +15,7 @@ namespace TechnologySystem.Controllers
 {
     public class AdminController : Controller
     {
+        [Authorize(Roles = Role.Admin)]
         // GET: Admin/Account
         public async Task<ActionResult> Index()
         {
@@ -81,7 +82,10 @@ namespace TechnologySystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email,
+                    Email = model.Email, FullName = model.FullName,
+                    Age = model.Age, Specialty = model.Specialty, Address = model.Address};
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

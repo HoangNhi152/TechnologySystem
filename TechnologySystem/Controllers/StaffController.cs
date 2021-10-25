@@ -14,6 +14,7 @@ using TechnologySystem.ViewModels;
 
 namespace TechnologySystem.Controllers
 {
+    [Authorize (Roles = Role.Staff)]
     public class StaffController : Controller
     {
         // GET: Admin/Account

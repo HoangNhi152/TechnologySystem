@@ -59,7 +59,7 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Admin", new { id = trainer.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete", "Delete", "Admin", new { id = trainer.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("ResetPassword", "ResetPassword", "Admin", new { id = trainer.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("ResetPassword", "ResetPassword", "Admin", new { email = trainer.Email }, new { @class = "btn btn-info" })
                 </td>
             </tr>
         }
