@@ -43,13 +43,16 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.User.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.User.Address, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.User.Address, "", new { @class = "text-danger" })
+    @if (!User.IsInRole(Role.Staff))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.User.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.User.Address, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+    }
 
     <div class="form-group">
         @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })

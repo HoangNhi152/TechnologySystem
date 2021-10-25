@@ -38,7 +38,7 @@
                 <td>@trainee.UserName</td>
                 <td>@trainee.FullName</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Staff", new { id = trainee.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Update", "Update", "Staff", new { id = trainee.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete", "Delete", "Staff", new { id = trainee.Id }, new { @class = "btn btn-danger" })
                     @Html.ActionLink("ResetPassword", "ResetPassword", "Staff", new { email = trainee.Email }, new { @class = "btn btn-info" })
                 </td>

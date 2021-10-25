@@ -101,7 +101,7 @@ namespace TechnologySystem.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> Edit(string id)
+        public async Task<ActionResult> Update(string id)
         {
             if (id == null)
             {
@@ -122,7 +122,7 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(InfoViewModel model)
+        public async Task<ActionResult> Update(InfoViewModel model)
         {
             if (ModelState.IsValid)
             {
