@@ -45,6 +45,8 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete", "Delete", "Course", new { id = course.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("See Trainer in Course", "ShowTrainers", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Add Trainer", "AddTrainers", "Course", new { id = course.Id }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }

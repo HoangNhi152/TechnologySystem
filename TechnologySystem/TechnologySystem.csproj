@@ -200,6 +200,10 @@
     <Compile Include="Migrations\202110250718373_Change_Data_Types_DateofBirth_of_AppplicationUser.Designer.cs">
       <DependentUpon>202110250718373_Change_Data_Types_DateofBirth_of_AppplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110261900374_AddAssignCourseTable.cs" />
+    <Compile Include="Migrations\202110261900374_AddAssignCourseTable.Designer.cs">
+      <DependentUpon>202110261900374_AddAssignCourseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -210,6 +214,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Utils\Role.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\AssignCoursesViewModel.cs" />
     <Compile Include="ViewModels\CourseCategories.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\UsersGroupViewModel.cs" />
@@ -290,6 +295,8 @@
     <Content Include="Views\Trainer\Edit.cshtml" />
     <Content Include="Views\Trainee\Index.cshtml" />
     <Content Include="Views\Trainee\Edit.cshtml" />
+    <Content Include="Views\Course\AddTrainers.cshtml" />
+    <Content Include="Views\Course\ShowTrainers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110250718373_Change_Data_Types_DateofBirth_of_AppplicationUser.resx">
       <DependentUpon>202110250718373_Change_Data_Types_DateofBirth_of_AppplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110261900374_AddAssignCourseTable.resx">
+      <DependentUpon>202110261900374_AddAssignCourseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

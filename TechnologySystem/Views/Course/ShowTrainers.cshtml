@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TechnologySystem.Models.ApplicationUser>
+@{
+    ViewBag.Title = "ShowTrainers";
+}
+
+<h2>Trainers in Course</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item active">
+                Trainers in Course
+                <span class="badge">@Model.Count()</span>
+            </li>
+            @foreach (var user in Model)
+            {
+                <li class="list-group-item">
+                    @user.Email
+                    <div>
+                        <span>
+                            @Html.ActionLink(
+                                                 "Remove",
+                                                 "RemoveTrainers",
+                                                 "Course",
+                                                 new { id = ViewBag.CourseId, userId = user.Id },
+                                                 new { @class = "text-danger text-right" }
+                            )
+
+                        </span>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

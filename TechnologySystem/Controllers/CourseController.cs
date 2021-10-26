@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,9 +13,12 @@ namespace TechnologySystem.Controllers
     public class CourseController : Controller
     {
         private ApplicationDbContext _context;
+        private UserManager<ApplicationUser> _userManager;
         public CourseController()
         {
             _context = new ApplicationDbContext();
+            _userManager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(new ApplicationDbContext()));
         }
 
         public ActionResult Index(string searchString)
@@ -81,5 +86,82 @@ namespace TechnologySystem.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Staff")]
+        public ActionResult ShowTrainers(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var members = _context.AssignCourses
+                //.Include(t => t.User)
+                .Where(t => t.CourseId == id)
+                .Select(t => t.User);
+            var trainer = new List<ApplicationUser>();       // Init List Users to Add Course
+
+            foreach (var user in members)
+            {
+                if (_userManager.GetRoles(user.Id)[0].Equals("Trainer"))
+                {
+                    trainer.Add(user);
+                }
+            }
+            ViewBag.CourseId = id;
+            return View(trainer);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Staff")]
+        public ActionResult AddTrainers(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            if (_context.Courses.SingleOrDefault(t => t.Id == id) == null)
+                return HttpNotFound();
+
+            var usersInDb = _context.Users.ToList();      // User trong Db
+
+            var usersInTeam = _context.AssignCourses         // User trong Team
+                //.Include(t => t.User)
+                .Where(t => t.CourseId == id)
+                .Select(t => t.User)
+                .ToList();
+
+            var usersToAdd = new List<ApplicationUser>();       // Init List Users to Add Team
+
+            foreach (var user in usersInDb)
+            {
+                if (!usersInTeam.Contains(user) &&
+                    _userManager.GetRoles(user.Id)[0].Equals("Trainer"))
+                {
+                    usersToAdd.Add(user);
+                }
+            }
+
+            var viewModel = new AssignCoursesViewModel
+            {
+                CourseId = (int)id,
+                Users = usersToAdd
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Staff")]
+        public ActionResult AddTrainers(AssignCourse model)
+        {
+            var courseUser = new AssignCourse
+            {
+                CourseId = model.CourseId,
+                UserId = model.UserId
+            };
+
+            _context.AssignCourses.Add(courseUser);
+            _context.SaveChanges();
+
+            return RedirectToAction("ShowTrainers", new { id = model.CourseId });
+        }
+
     }
 }

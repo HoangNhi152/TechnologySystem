@@ -11,9 +11,9 @@ namespace TechnologySystem.Models
     {
 		[Key]
 		[Column(Order = 1)]
-		[ForeignKey("Trainer")]
+		[ForeignKey("User")]
 		public string UserId { get; set; }
-		public ApplicationUser Trainer { get; set; }
+		public ApplicationUser User{ get; set; }
 
 		[Key]
 		[Column(Order = 2)]

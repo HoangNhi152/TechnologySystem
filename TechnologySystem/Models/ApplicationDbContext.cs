@@ -9,6 +9,7 @@ namespace TechnologySystem.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        public DbSet<AssignCourse> AssignCourses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Course> Courses { get; set; }
 
