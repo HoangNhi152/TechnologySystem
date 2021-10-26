@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TechnologySystem.Models;
+using TechnologySystem.Utils;
 using TechnologySystem.ViewModels;
 
 namespace TechnologySystem.Controllers
 {
+    [Authorize(Roles = Role.Trainer)]
     public class TrainerController : Controller
     {
         // GET: Trainer
