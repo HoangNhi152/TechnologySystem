@@ -253,6 +253,21 @@ namespace TechnologySystem.Controllers
 
             return RedirectToAction("ShowTrainees", new { id = model.CourseId });
         }
+        [HttpGet]
+        [Authorize(Roles = "staff")]
+        public ActionResult RemoveTrainees(int id, string userId)
+        {
+            var courseUserToRemove = _context.AssignCourses
+                .SingleOrDefault(t => t.CourseId == id && t.UserId == userId);
+
+            if (courseUserToRemove == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            _context.AssignCourses.Remove(courseUserToRemove);
+            _context.SaveChanges();
+
+            return RedirectToAction("ShowTrainees", new { id = id });
+        }
 
     }
 }
