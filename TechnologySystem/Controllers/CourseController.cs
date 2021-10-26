@@ -60,6 +60,20 @@ namespace TechnologySystem.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            if (id == null) return HttpNotFound();
+
+            var course = _context.Courses
+                //.Include(t => t.Category)
+                .SingleOrDefault(t => t.Id == id);
+
+            if (course == null) return HttpNotFound();
+
+            return View(course);
+        }
+
         public ActionResult Edit(int id)
         {
             var Course = _context.Courses.SingleOrDefault(t => t.Id == id);
@@ -254,7 +268,7 @@ namespace TechnologySystem.Controllers
             return RedirectToAction("ShowTrainees", new { id = model.CourseId });
         }
         [HttpGet]
-        [Authorize(Roles = "staff")]
+        [Authorize(Roles = "Staff")]
         public ActionResult RemoveTrainees(int id, string userId)
         {
             var courseUserToRemove = _context.AssignCourses

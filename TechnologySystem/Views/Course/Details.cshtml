@@ -1,0 +1,28 @@
+﻿@model TechnologySystem.Models.Course
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("staff"))
+{
+    <div class="form-group">
+        @Html.ActionLink(
+            "Back to Index page",
+            "Index",
+            "Courses",
+            null,
+            new { @class = "btn btn-primary" })
+    </div>
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">Name: @Model.CourseName </div>
+    <div class="panel-body">
+        <p>Category: @Model.Category.Name</p>
+        <p>Start Date: @Model.StartDate.ToString("dd/MMM/yyyy")</p>
+        <p>Description: @Model.Description</p>
+    </div>
+</div>
