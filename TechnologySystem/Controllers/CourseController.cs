@@ -178,5 +178,81 @@ namespace TechnologySystem.Controllers
             return RedirectToAction("ShowTrainers", new { id = id });
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Staff")]
+        public ActionResult ShowTrainees(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var members = _context.AssignCourses
+                //.Include(t => t.User)
+                .Where(t => t.CourseId == id)
+                .Select(t => t.User);
+            var trainee = new List<ApplicationUser>();       // Init List Users to Add Course
+
+            foreach (var user in members)
+            {
+                if (_userManager.GetRoles(user.Id)[0].Equals("Trainee"))
+                {
+                    trainee.Add(user);
+                }
+            }
+            ViewBag.CourseId = id;
+            return View(trainee);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Staff")]
+        public ActionResult AddTrainees(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            if (_context.Courses.SingleOrDefault(t => t.Id == id) == null)
+                return HttpNotFound();
+
+            var usersInDb = _context.Users.ToList();      // User trong Db
+
+            var usersInTeam = _context.AssignCourses         // User trong Team
+                //.Include(t => t.User)
+                .Where(t => t.CourseId == id)
+                .Select(t => t.User)
+                .ToList();
+
+            var usersToAdd = new List<ApplicationUser>();       // Init List Users to Add Team
+
+            foreach (var user in usersInDb)
+            {
+                if (!usersInTeam.Contains(user) &&
+                    _userManager.GetRoles(user.Id)[0].Equals("Trainee"))
+                {
+                    usersToAdd.Add(user);
+                }
+            }
+
+            var viewModel = new AssignCoursesViewModel
+            {
+                CourseId = (int)id,
+                Users = usersToAdd
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Staff")]
+        public ActionResult AddTrainees(AssignCourse model)
+        {
+            var courseUser = new AssignCourse
+            {
+                CourseId = model.CourseId,
+                UserId = model.UserId
+            };
+
+            _context.AssignCourses.Add(courseUser);
+            _context.SaveChanges();
+
+            return RedirectToAction("ShowTrainees", new { id = model.CourseId });
+        }
+
     }
 }
