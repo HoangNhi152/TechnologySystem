@@ -48,6 +48,13 @@ namespace TechnologySystem.Controllers
         {
             if(ModelState.IsValid)
             {
+                var Course = _context.Courses.SingleOrDefault(t => t.CourseName == courseCategories.Course.CourseName);
+                if (Course != null)
+                {
+                    ViewBag.Error = "Name is already exist";
+                    courseCategories.Categories = _context.Categories.ToList();
+                    return View(courseCategories);
+                }
                 var newCourse = new Course
                 {
                     CourseName = courseCategories.Course.CourseName,
@@ -85,6 +92,12 @@ namespace TechnologySystem.Controllers
         {
             if(ModelState.IsValid)
             {
+                var Edit = _context.Courses.SingleOrDefault(t => t.CourseName == newCourse.CourseName);
+                if (Edit != null)
+                {
+                    ViewBag.Error = "Name is already exist";
+                    return View(newCourse);
+                }    
                 var oldCourse = _context.Courses.SingleOrDefault(c => c.Id == newCourse.Id);
                 oldCourse.CourseName = newCourse.CourseName;
                 oldCourse.Description = newCourse.Description;

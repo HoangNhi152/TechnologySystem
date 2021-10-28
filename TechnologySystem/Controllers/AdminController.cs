@@ -17,19 +17,19 @@ namespace TechnologySystem.Controllers
     {
         [Authorize(Roles = Role.Admin)]
         // GET: Admin/Account
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var trainerRole = await _context.Roles.SingleOrDefaultAsync(r => r.Name == Role.Trainer);
-            var staffRole = await _context.Roles.SingleOrDefaultAsync(r => r.Name == Role.Staff);
+            var trainerRole = _context.Roles.SingleOrDefault(r => r.Name == Role.Trainer);
+            var staffRole = _context.Roles.SingleOrDefault(r => r.Name == Role.Staff);
 
             var model = new UsersGroupViewModel()
             {
-                Trainers = await _context.Users
+                Trainers = _context.Users
                     .Where(u => u.Roles.Any(r => r.RoleId == trainerRole.Id))
-                    .ToListAsync(),
-                Staffs = await _context.Users
+                    .ToList(),
+                Staffs = _context.Users
                     .Where(u => u.Roles.Any(r => r.RoleId == staffRole.Id))
-                    .ToListAsync(),
+                    .ToList(),
             };
             return View(model);
         }
@@ -121,12 +121,12 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(InfoViewModel model)
+        public ActionResult Edit(InfoViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = model.User;
-                var userinDb = await UserManager.FindByIdAsync(user.Id);
+                var userinDb = UserManager.FindById(user.Id);
 
                 if (userinDb == null)
                     return HttpNotFound();
@@ -137,14 +137,14 @@ namespace TechnologySystem.Controllers
                 userinDb.UserName = user.Email;
 
 
-                IdentityResult result = await UserManager.UpdateAsync(userinDb);
+                IdentityResult result = UserManager.Update(userinDb);
 
                 // if (model.Specialty != null)
                 // {
                 //    var profile = await _context.TrainerProfiles.SingleOrDefaultAsync(p => p.UserId == userinDb.Id);
                 //    profile.Specialty = model.Specialty;
                 // }
-                await _context.SaveChangesAsync();
+                 _context.SaveChanges();
 
                 if (result.Succeeded)
                     return RedirectToAction(nameof(Index));
@@ -172,14 +172,14 @@ namespace TechnologySystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        public ActionResult ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
             //var email = (string)TempData["userEmail"];
-            var user = await UserManager.FindByEmailAsync(model.Email);
+            var user = UserManager.FindByEmail(model.Email);
 
             if (user == null)
             {
@@ -187,15 +187,15 @@ namespace TechnologySystem.Controllers
                 return View(model);
             }
 
-            var roles = await UserManager.GetRolesAsync(user.Id);
+            var roles = UserManager.GetRoles(user.Id);
             if (!roles.All(r => r == Role.Staff || r == Role.Trainer))
             {
                 ViewBag.ErrorMessage = "The user cannot be reset. Permission is denied.";
                 return View(model);
             }
 
-            model.Code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-            IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            model.Code = UserManager.GeneratePasswordResetToken(user.Id);
+            IdentityResult result = UserManager.ResetPassword(user.Id, model.Code, model.Password);
 
             if (result.Succeeded)
             {

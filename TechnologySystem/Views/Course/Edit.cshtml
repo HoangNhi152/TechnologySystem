@@ -8,16 +8,23 @@
 
 @using (Html.BeginForm("Edit", "Course", FormMethod.Post))
 {
+    if (ViewBag.Error == "Name is already exist")
+    {
+        <h1 class="text-danger">@ViewBag.Error<br></h1>
+    }
+
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">
         @Html.LabelFor(c => c.CourseName)
         @Html.TextBoxFor(c => c.CourseName, new { @class = "form-control" })
         @Html.ValidationMessageFor(c => c.CourseName, "", new { @class = "text-danger" })
     </div>
+
     <div class="form-group">
         @Html.LabelFor(c => c.Description)
         @Html.TextBoxFor(c => c.Description, new { style = "height:40px", @class = "form-control" })
     </div>
+
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Edit</button>
     </div>

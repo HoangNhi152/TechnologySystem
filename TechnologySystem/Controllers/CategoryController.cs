@@ -35,7 +35,12 @@ namespace TechnologySystem.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            if (!ModelState.IsValid) return View(category);
+            var Category = _context.Categories.SingleOrDefault(t => t.CategoryName == category.CategoryName);
+            if (Category != null)
+            {
+                ViewBag.Error = "Name is already exist";
+                return View(category);
+            }
 
             var newCategory = new Category()
             {
@@ -59,6 +64,12 @@ namespace TechnologySystem.Controllers
         {
             if(ModelState.IsValid)
             {
+                var Edit = _context.Categories.SingleOrDefault(t => t.CategoryName == newCategory.CategoryName);
+                if (Edit != null)
+                {
+                    ViewBag.Error = "Name is already exist";
+                    return View(newCategory); 
+                }
                 var oldCategory = _context.Categories.SingleOrDefault(c => c.Id == newCategory.Id);
                 oldCategory.CategoryName = newCategory.CategoryName;
                 oldCategory.Description = newCategory.Description;
