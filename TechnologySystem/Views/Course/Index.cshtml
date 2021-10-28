@@ -46,10 +46,10 @@
                     @Html.ActionLink("Details","Details", "Course",new { id = course.Id },new { @class = "btn btn-primary" })
                     @Html.ActionLink("Edit", "Edit", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete", "Delete", "Course", new { id = course.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("See Trainer in Course", "ShowTrainers", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Add Trainer", "AddTrainers", "Course", new { id = course.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("See Trainee in Course", "ShowTrainees", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Add Trainee", "AddTrainees", "Course", new { id = course.Id }, new { @class = "btn btn-primary" })
+                    
+                    @Html.ActionLink("Assign Trainer", "AddTrainers", "Course", new { id = course.Id }, new { @class = "btn btn-primary" })
+                    
+                    @Html.ActionLink("Asign Trainee", "AddTrainees", "Course", new { id = course.Id }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }

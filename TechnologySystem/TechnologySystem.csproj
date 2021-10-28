@@ -300,6 +300,8 @@
     <Content Include="Views\Course\ShowTrainees.cshtml" />
     <Content Include="Views\Course\AddTrainees.cshtml" />
     <Content Include="Views\Course\Details.cshtml" />
+    <Content Include="Views\Staff\ListUser.cshtml" />
+    <Content Include="Views\Course\MyCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

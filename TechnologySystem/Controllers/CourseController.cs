@@ -115,7 +115,6 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Staff")]
         public ActionResult ShowTrainers(int? id)
         {
             if (id == null)
@@ -206,7 +205,6 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Staff")]
         public ActionResult ShowTrainees(int? id)
         {
             if (id == null)
@@ -294,6 +292,20 @@ namespace TechnologySystem.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("ShowTrainees", new { id = id });
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Trainer, Trainee")]
+        public ActionResult MyCourse()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var courses = _context.AssignCourses
+                .Where(t => t.UserId.Equals(userId))
+                .Select(t => t.Course)
+                .ToList();
+
+            return View(courses);
         }
 
     }
