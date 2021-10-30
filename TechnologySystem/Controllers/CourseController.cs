@@ -118,7 +118,6 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Staff")]
         public ActionResult ShowTrainers(int? id)
         {
             if (id == null)
@@ -209,7 +208,6 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Staff")]
         public ActionResult ShowTrainees(int? id)
         {
             if (id == null)
@@ -319,8 +317,7 @@ namespace TechnologySystem.Controllers
             var lstUser = _context.AssignCourses
                                     .Include("User")
                                     .Include("Course")
-                                    .Where(m => Course.Any(x => x.Id == m.Course.Id))
-                                    .ToList();
+                                    .Where(m => Course.Any(x => x.Id == m.Course.Id)).ToList();
             var lstUserByRole = lstUser.Where(m => m.User.Roles.Any(x => x.RoleId == getRole.Id)).ToList();
             return View(lstUserByRole);
         }
