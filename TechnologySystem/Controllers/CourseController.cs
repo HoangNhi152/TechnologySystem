@@ -44,6 +44,7 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create(CourseCategories courseCategories, int Id)
         {
             if(ModelState.IsValid)
@@ -68,6 +69,7 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Details(int? id)
         {
             if (id == null) return HttpNotFound();
@@ -88,6 +90,7 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Staff")]
         public ActionResult Edit(Course newCourse)
         {
             if(ModelState.IsValid)
@@ -115,6 +118,7 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult ShowTrainers(int? id)
         {
             if (id == null)
@@ -205,6 +209,7 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult ShowTrainees(int? id)
         {
             if (id == null)
@@ -307,6 +312,17 @@ namespace TechnologySystem.Controllers
 
             return View(courses);
         }
-
+        public ActionResult ListUser(string searchCourse, string role)
+        {   
+            var getRole = _context.Roles.SingleOrDefault(r => r.Name == role);
+            var Course = _context.Courses.Where(m => m.CourseName.Contains(searchCourse));
+            var lstUser = _context.AssignCourses
+                                    .Include("User")
+                                    .Include("Course")
+                                    .Where(m => Course.Any(x => x.Id == m.Course.Id))
+                                    .ToList();
+            var lstUserByRole = lstUser.Where(m => m.User.Roles.Any(x => x.RoleId == getRole.Id)).ToList();
+            return View(lstUserByRole);
+        }
     }
 }

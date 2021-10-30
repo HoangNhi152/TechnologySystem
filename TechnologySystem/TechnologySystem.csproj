@@ -217,6 +217,7 @@
     <Compile Include="ViewModels\AssignCoursesViewModel.cs" />
     <Compile Include="ViewModels\CourseCategories.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
+    <Compile Include="ViewModels\ListUserViewModel.cs" />
     <Compile Include="ViewModels\UsersGroupViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -300,8 +301,8 @@
     <Content Include="Views\Course\ShowTrainees.cshtml" />
     <Content Include="Views\Course\AddTrainees.cshtml" />
     <Content Include="Views\Course\Details.cshtml" />
-    <Content Include="Views\Staff\ListUser.cshtml" />
     <Content Include="Views\Course\MyCourse.cshtml" />
+    <Content Include="Views\Course\ListUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

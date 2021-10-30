@@ -171,14 +171,6 @@ namespace TechnologySystem.Controllers
                 ModelState.AddModelError("", error);
             }
         }
-        public ActionResult ListUser(string searchCourse, string role)
-        {
-            var getRole = _context.Roles.SingleOrDefault(r => r.Name == role);
-            var Course = _context.Courses.SingleOrDefault(m => m.CourseName.Contains(searchCourse));
-            var lstUser = _context.AssignCourses.Where(m => m.Course == Course).Select(m => m.User).ToList();
-            var lstUserByRole = lstUser.Where(m => m.Roles.Any(x => x.RoleId == getRole.Id)).ToList();
-            return View(lstUserByRole);
-        }
-
+        
     }
 }
