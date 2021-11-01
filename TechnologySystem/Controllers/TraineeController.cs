@@ -42,53 +42,6 @@ namespace TechnologySystem.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var user = await UserManager.FindByIdAsync(id);
-
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            var model = new InfoViewModel()
-            {
-                User = user,
-                Roles = new List<string>(await UserManager.GetRolesAsync(id))
-            };
-            return View(model);
-        }
-        [HttpPost]
-        public async Task<ActionResult> Edit(InfoViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = model.User;
-                var userinDb = await UserManager.FindByIdAsync(user.Id);
-
-                if (userinDb == null)
-                    return HttpNotFound();
-                userinDb.FullName = user.FullName;
-                userinDb.Age = user.Age;
-                userinDb.DateofBirth = user.DateofBirth;
-                userinDb.Email = user.Email;
-                userinDb.UserName = user.Email;
-                userinDb.Address = user.Address;
-                userinDb.Education = user.Education;
-                IdentityResult result = await UserManager.UpdateAsync(userinDb);
-
-
-                if (result.Succeeded)
-                    return RedirectToAction("Index");
-                else
-                    AddErrors(result);
-                // If we got this far, something failed, redisplay form
-            }
-            return View(model);
-        }
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

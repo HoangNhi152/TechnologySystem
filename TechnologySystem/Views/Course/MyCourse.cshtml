@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TechnologySystem.Models.Course>
+@using TechnologySystem.Utils
 @{
     ViewBag.Title = "MyCourse";
 }
@@ -14,13 +15,16 @@
             {
         <li class="list-group-item">
             @course.CourseName
-            <div class="form-group">
-                @Html.ActionLink("See Trainer in Course", "ShowTrainers", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
-            </div>
-            <div class="form-group">
-                @Html.ActionLink("See Trainee in Course", "ShowTrainees", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
-            </div>
-        </li>
+            @if (User.IsInRole(Role.Staff))
+            {
+                <div class="form-group">
+                    @Html.ActionLink("See Trainer in Course", "ShowTrainers", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
+                </div>
+            }
+                <div class="form-group">
+                    @Html.ActionLink("See Trainee in Course", "ShowTrainees", "Course", new { id = course.Id }, new { @class = "btn btn-success" })
+                </div>
+            </li>
 
             }
         </ul>
